@@ -88,7 +88,6 @@ function StartScreen:enter()
   xpos_step = 8
   opacity_step = 2
   change_scene_once = true
-  love.audio.stop()
   playMusic('ggj18_theme')
 end
 
@@ -159,6 +158,9 @@ local function drawFn2()
           end
         end
 
+
+        love.graphics.setColor(12,24,48,128)
+        love.graphics.print('v' .. GAME_VERSION,282,4)
       end
     end)
 

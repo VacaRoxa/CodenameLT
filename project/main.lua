@@ -18,6 +18,9 @@ local slam      = requireLibrary("slam")
 local Terebi    = requireLibrary("terebi")
 local Gamestate = requireLibrary("hump/gamestate")
 
+-- Game Version
+GAME_VERSION = '1.0.0'
+
 -- a variable for debug flags
 debug_mode = false
 restart = false
