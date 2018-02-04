@@ -345,7 +345,15 @@ function love.draw()
 end
 
 -- Input
+local alt_is_pressed
+
 function love.keypressed(key)
+
+  if key == 'lalt' or key == 'ralt' then
+    alt_is_pressed = true
+    return
+  end
+
   if     key == 'f1' then
     debug_mode = debug_mode == false
   elseif key == 'f5' then
@@ -356,7 +364,7 @@ function love.keypressed(key)
     screen:increaseScale()
   elseif key == '-' then
     screen:decreaseScale()
-  elseif key == 'f11' then
+  elseif key == 'f11' or (alt_is_pressed and (key == 'return' or key == 'kpenter')) then
     screen:toggleFullscreen()
   elseif key == 'escape' then
     goToGameState('StartScreen')
@@ -374,7 +382,7 @@ function love.keypressed(key)
 
 	if     key == 'i' then
 		keys_pressed['buttonx'] = true
-	elseif key == 'k' then
+	elseif key == 'k' or key == 'space' then
 		keys_pressed['buttona'] = true
 	elseif key == 'j' then
 		keys_pressed['buttony'] = true
@@ -386,6 +394,11 @@ function love.keypressed(key)
 end
 
 function love.keyreleased(key)
+  if key == 'lalt' or key == 'ralt' then
+    alt_is_pressed = false
+    return
+  end
+
 	if     key == 'up' or key == 'w' then
 		keys_pressed['up'] = nil
 	elseif key == 'down' or key == 's' then
