@@ -20,6 +20,18 @@ Use **`WASD`** or Arrow keys to move. Use **`K`** as accept button.
 
 Xbox360 USB controls are also supported. Other controls were not tested.
 
+## Running
+
+The game is made with Love2d, so after you `git clone` this repository or
+download the `.zip`, you can run by going in it's parent folder and running
+
+    love project/
+
+Alternatively, if you just want to play, look into [**releases**](https://github.com/VacaRoxa/CodenameLT/releases) 
+or go to the game itch.io page and download the latest binary.
+
+## Game Code
+
 ### Love2d and Lua
 
 **Lua** is a scripting language that is really good at being plugged in existing 
