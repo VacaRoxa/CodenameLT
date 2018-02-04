@@ -380,6 +380,15 @@ local function initializePlayerCharacter(spawnX,spawnY)
   return player
 end
 
+local dieEffect = 0
+local function playerDie()
+  dieEffect = 64
+  player.inventory:removeAllItem('radio')
+  --Sfx.DyingIsBad:play()
+  Sfx.GGJ18_game_over_chords:play()
+  restart = true
+
+end
 -- functions for dealing with collision
 
 -- once contact starts, we run this
@@ -401,8 +410,7 @@ local function beginContact(a, b, coll)
           player.body:applyLinearImpulse(-n_x*200, -n_y*200)
           return
         else
-          player.inventory:removeAllItem('radio')
-          restart = true
+          playerDie()
         end
 
       elseif string.match(a:getUserData(), 'enemy') then
@@ -412,8 +420,7 @@ local function beginContact(a, b, coll)
           player.body:applyLinearImpulse(n_x*200, n_y*200)
           return
         else
-          player.inventory:removeAllItem('radio')
-          restart = true
+          playerDie()
         end
 
       end
@@ -449,34 +456,16 @@ function setLevel(n)
 
   map = sti("map/level" .. n .. ".lua", { "box2d" })
 
-  if last_level==1 then 
-    Music.ggj18_theme:stop()
-    -- Music.theme:stop()
-  elseif last_level==2 then
-    -- Music.theme:stop()
-  elseif last_level==3 then
-    -- Music.theme:stop()
-  elseif last_level==4 then
-    -- Music.theme:stop()
-  elseif last_level==5 then
-    Music.ggj18_ambient:stop()
-    Music.ggj18_theme:stop()
-    Music.ggj18_theme:play()
-  end
-
   if n==1 then
-    Music.ggj18_theme:stop()
-    Music.ggj18_ambient:play()
+    playMusic('ggj18_ambient')
   elseif n==2 then
-    -- Music.theme:play()
+    playMusic('ggj18_ambient')
   elseif n==3 then
-    -- Music.theme:play()
+    playMusic('ggj18_ambient')
   elseif n==4 then
-    -- Music.theme:play()
+    playMusic('ggj18_ambient')
   elseif n==5 then
-    Music.ggj18_ambient:stop()
-    Music.ggj18_theme:stop()
-    Music.ggj18_theme:play()
+    playMusic('ggj18_theme')
   end
     
   if map ~= nil then
@@ -903,10 +892,18 @@ local function drawFn()
   -- the next draw is called
   love.graphics.setShader(shader_screen)
   strength = math.sin(love.timer.getTime()*2)
-  shader_screen:send("abberationVector", {
-    shader_shot_factor*lume.clamp(strength * math.sin(love.timer.getTime() * 3) / 200, 0, 100)+(shader_shot_factor-1), 
-    shader_shot_factor*lume.clamp(strength * math.sin(love.timer.getTime() * 5) / 200, 0, 100)+(-shader_shot_factor+1)
-  })
+  if dieEffect > 0 then
+    dieEffect = dieEffect -1
+    shader_screen:send("abberationVector", {
+      ((dieEffect+love.math.random(6))*dieEffect*dieEffect)/3000000, 
+      ((dieEffect+love.math.random(6))*dieEffect*dieEffect)/3000000
+    })
+  else 
+    shader_screen:send("abberationVector", {
+      shader_shot_factor*lume.clamp(strength * math.sin(love.timer.getTime() * 3) / 200, 0, 100)+(shader_shot_factor-1), 
+      shader_shot_factor*lume.clamp(strength * math.sin(love.timer.getTime() * 5) / 200, 0, 100)+(-shader_shot_factor+1)
+    })
+  end
 
   -- draw everything on screen
   love.graphics.draw(cnv,0,0)

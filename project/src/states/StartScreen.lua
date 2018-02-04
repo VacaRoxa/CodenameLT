@@ -89,8 +89,7 @@ function StartScreen:enter()
   opacity_step = 2
   change_scene_once = true
   love.audio.stop()
-  Music.ggj18_ambient:stop()
-  Music.ggj18_theme:play()
+  playMusic('ggj18_theme')
 end
 
 function StartScreen:update(dt)

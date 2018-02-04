@@ -175,6 +175,19 @@ Music   = Proxy(function(k) return love.audio.newSource('music/' .. k .. '.ogg',
 -- or    
     Sfx.explosion:play()
 --]]
+
+
+local lastPlayingMusic
+function playMusic(musicName)
+  if musicName ~= lastPlayingMusic then
+    if lastPlayingMusic ~= nil then
+      Music[lastPlayingMusic]:stop()
+    end
+    Music[musicName]:play()
+  end
+
+  lastPlayingMusic = musicName
+end
     
 -- Require all files in a folder and its subfolders, this way we do not have to require every new file
 local function recursiveRequire(folder, tree)
