@@ -196,6 +196,8 @@ happen instantly.
 
 ## License and Copyright
 
+The font used is [*Verdana2*](http://www.pentacom.jp/pentacom/bitfontmaker2/gallery/?id=278) by Paul Spades.
+
 This code is [`MIT License`](LICENSE) and the music and image graphics are available through [`CC BY 4.0`](COPYRIGHT)
 
 [@bakudas](https://twitter.com/bakudas) | [@pcbmani](https://twitter.com/pcbmani) | [@_Gabrielfer](https://twitter.com/_Gabrielfer) | [@MauricioMunky](https://twitter.com/MauricioMunky) | [@DidiGameBoy](https://twitter.com/DidiGameBoy) | [@derekpxart](https://twitter.com/derekpxart) | [@eri0o](https://twitter.com/eri0o) | [@rafaelgiordanno](https://twitter.com/rafaelgiordanno)
