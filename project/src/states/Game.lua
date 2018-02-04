@@ -337,9 +337,14 @@ local function initializePlayerCharacter(spawnX,spawnY)
                -- world:DestroyBody(sprite_list[k].body)
 
                 for kk,vv in pairs(destroy_queue) do
-                  sprite_list[destroy_queue[kk]].body:destroy()
-                  sprite_list[destroy_queue[kk]] = nil --actually remove agents from game
-                  destroy_queue[kk] = nil
+                  if destroy_queue[kk]~= nil and  -- prevents crashes when shooting too fast
+                  sprite_list[destroy_queue[kk]] ~= nil and 
+                  sprite_list[destroy_queue[kk]].body ~= nil then
+                    
+                    sprite_list[destroy_queue[kk]].body:destroy()
+                    sprite_list[destroy_queue[kk]] = nil --actually remove agents from game
+                    destroy_queue[kk] = nil
+                  end
                 end
                 --sprite_list[k] = nil  
               end)
