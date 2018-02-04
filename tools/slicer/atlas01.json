@@ -1,0 +1,55 @@
+{ "frames": {
+   "atlas01.png": {
+    "frame": { "x": 0, "y": 0, "w": 640, "h": 360 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 640, "h": 360 },
+    "sourceSize": { "w": 640, "h": 360 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.6-x64",
+  "image": "E:\\Dropbox\\JAMs & Cowork\\GGJ2018\\02 producao\\atlas01-sheet.png",
+  "format": "RGBA8888",
+  "size": { "w": 640, "h": 360 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "main", "opacity": 255, "blendMode": "normal" },
+   { "name": "fg", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 2, "y": 2, "w": 20, "h": 51 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 23, "y": 19, "w": 19, "h": 34 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 44, "y": 23, "w": 32, "h": 30 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 78, "y": 12, "w": 32, "h": 42 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 134, "y": 19, "w": 58, "h": 34 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 195, "y": 19, "w": 34, "h": 34 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 235, "y": 22, "w": 20, "h": 35 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 262, "y": 15, "w": 81, "h": 40 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 282, "y": 89, "w": 60, "h": 24 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 236, "y": 92, "w": 44, "h": 20 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 225, "y": 69, "w": 49, "h": 20 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 205, "y": 66, "w": 17, "h": 23 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 166, "y": 57, "w": 36, "h": 32 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 143, "y": 66, "w": 21, "h": 23 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 121, "y": 59, "w": 18, "h": 30 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 100, "y": 59, "w": 19, "h": 30 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 80, "y": 64, "w": 16, "h": 25 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 47, "y": 64, "w": 30, "h": 25 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 19, "y": 66, "w": 23, "h": 23 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 1, "y": 59, "w": 17, "h": 30 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 78, "y": 184, "w": 14, "h": 14 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 253, "y": 206, "w": 40, "h": 25 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 315, "y": 166, "w": 20, "h": 29 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 336, "y": 162, "w": 72, "h": 79 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 352, "y": 11, "w": 186, "h": 150 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 242, "y": 134, "w": 32, "h": 42 } }] },
+   { "name": "Slice", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 275, "y": 134, "w": 37, "h": 61 } }] }
+  ]
+ }
+}
