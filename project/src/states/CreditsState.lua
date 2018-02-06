@@ -94,6 +94,7 @@ local function drawFn2()
     shader_screen:send("abberationVector", {strength*math.sin(love.timer.getTime()*7)/200, strength*math.cos(love.timer.getTime()*7)/200})
 
     
+    scrBtn:draw()
 end
 
 function CreditsState:draw()

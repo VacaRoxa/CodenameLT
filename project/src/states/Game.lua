@@ -891,6 +891,7 @@ local function drawFn()
       love.graphics.print("player x="..player.pos.x..", y="..player.pos.y,32,8)
     end
     
+    scrBtn:draw()
   end)
 
   -- now we enable the shader, this will translate pixel position and colors once

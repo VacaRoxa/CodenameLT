@@ -161,6 +161,7 @@ local function drawFn2()
 
         love.graphics.setColor(12,24,48,128)
         love.graphics.print('v' .. GAME_VERSION,282,4)
+        scrBtn:draw()
       end
     end)
 

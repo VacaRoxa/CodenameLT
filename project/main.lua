@@ -1,7 +1,7 @@
 --
 --
---  Created by Tilmann Hars
---  Copyright (c) 2014 Headchant. All rights reserved.
+--  Code Created by Érico 
+--  Copyright (c) 2018 Vacaroxa. All rights reserved.
 --
 
 -- Set Library Folders
@@ -19,7 +19,7 @@ local Terebi    = requireLibrary("terebi")
 local Gamestate = requireLibrary("hump/gamestate")
 
 -- Game Version
-GAME_VERSION = '1.0.1'
+GAME_VERSION = '1.0.3'
 
 -- a variable for debug flags
 debug_mode = false
@@ -212,8 +212,16 @@ local function extractFileName(str)
 	return string.match(str, "(.-)([^\\/]-%.?([^%.\\/]*))$")
 end
 
+
+
+local ScreenButton  = require 'src.entities.ScreenButton'
+scrBtn = ScreenButton()
+
+
 -- Initialization
 function love.load(arg)
+  local onload_width, onload_height = love.graphics.getDimensions()
+
 	for k, v in ipairs(arg) do
 		-- mute music
 		if (v == '-nomusic') then
@@ -236,14 +244,16 @@ function love.load(arg)
   -- Set nearest-neighbour scaling. Calling this is optional.
   Terebi.initializeLoveDefaults()
 
+  local scaleH = onload_height / GAME_HEIGHT
+  local scaleW = onload_width / GAME_WIDTH
+  local aScale = math.floor(math.min(scaleW,scaleH))
+
   -- Parameters: game width, game height, starting scale factor
-  screen = Terebi.newScreen(GAME_WIDTH,GAME_HEIGHT, 1)
+  screen = Terebi.newScreen(GAME_WIDTH,GAME_HEIGHT, aScale)
     -- This color will used for fullscreen letterboxing when content doesn't fit exactly. (Optional)
     :setBackgroundColor(64, 64, 64)
 
-  if GAME_WIDTH == 320 then
-    screen:increaseScale()
-  end
+
 
   -- add all font as objects
 	font_Verdana2 = love.graphics.newFont("fonts/Verdana2.ttf", 16)
@@ -278,6 +288,37 @@ end
 
 -- Logic
 function love.update( dt )
+  scrBtn:update(dt)
+  if scrBtn.previouPressed.left ~= true and scrBtn.pressed.left == true then 
+    keys_pressed['left'] = true
+  elseif scrBtn.previouPressed.left == true and scrBtn.pressed.left ~= true then  
+    keys_pressed['left'] = nil
+  end
+
+  if scrBtn.previouPressed.right ~= true and scrBtn.pressed.right == true then 
+    keys_pressed['right'] = true
+  elseif scrBtn.previouPressed.right == true and scrBtn.pressed.right ~= true then  
+    keys_pressed['right'] = nil
+  end
+
+  if scrBtn.previouPressed.up ~= true and scrBtn.pressed.up == true then 
+    keys_pressed['up'] = true
+  elseif scrBtn.previouPressed.up == true and scrBtn.pressed.up ~= true then  
+    keys_pressed['up'] = nil
+  end
+
+  if scrBtn.previouPressed.down ~= true and scrBtn.pressed.down == true then 
+    keys_pressed['down'] = true
+  elseif scrBtn.previouPressed.down == true and scrBtn.pressed.down ~= true then  
+    keys_pressed['down'] = nil
+  end
+
+  if scrBtn.previouPressed.buttona ~= true and scrBtn.pressed.buttona == true then 
+    keys_pressed['buttona'] = true
+  elseif scrBtn.previouPressed.buttona == true and scrBtn.pressed.buttona ~= true then  
+    keys_pressed['buttona'] = nil
+  end
+
   -- things for joystick
 	if p1joystick ~= nil then
 		-- getGamepadAxis returns a value between -1 and 1.
