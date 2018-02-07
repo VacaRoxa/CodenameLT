@@ -14,11 +14,12 @@ Firstly the people involved in the whole project:
 
 ## Game Controls
 
-Use **`WASD`** or Arrow keys to move. Use **`K`** as accept button.
+Use **`WASD`** or Arrow keys to move. Use **`K`** or **`space`** as accept button.
 
-**`F11`** gives fullscreen, **`-`** and **`+`** rescale the game window.
+**`F11`** or **`Alt+Enter`** gives fullscreen, **`-`** and **`+`** rescale the game window.
 
-Xbox360 USB controls are also supported. Other controls were not tested.
+Xbox360 USB controls are also supported. Other controls were not tested. 
+Android and iOS has experimental touch controls.
 
 ## Running
 
