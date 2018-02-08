@@ -525,11 +525,6 @@ function setLevel(n)
         if spr~= nil and spr.active then
           spr.draw()
         end
-        if spr.type == 'enemy' then
-          if spr.active then
-            spr.update(player)
-          end        
-        end
         
         if debug_mode then
           if spr.body ~= nil then 
@@ -805,6 +800,14 @@ function Game:update(dt)
       end
     end
 
+  end
+
+  for _,spr in pairs(sprite_list) do
+    if spr.type == 'enemy' then
+      if spr.active then
+        spr.update(player)
+      end        
+    end
   end
 
   -- update onScreenDialog
