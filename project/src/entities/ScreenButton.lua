@@ -85,8 +85,8 @@ ScreenButton = Class{
         self.pressed.down = nil
       end
 
-      self.touchpos.x = x
-      self.touchpos.y = y
+      self.touchpos.x = sx
+      self.touchpos.y = sy
 
     else
 
@@ -127,7 +127,7 @@ ScreenButton = Class{
     love.graphics.circle('fill',self.buttonA.x,self.buttonA.y,self.buttonA.r)
 
     love.graphics.setColor(244,244,255,40)
-    love.graphics.circle('fill',self.touchpos.x,self.touchpos.y,self.joy.r/4)
+    love.graphics.circle('fill',self.touchpos.x,self.touchpos.y,self.joy.r/2)
   end
 }
 
