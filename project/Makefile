@@ -4,9 +4,12 @@
 love=/usr/bin/love
 zip=/usr/bin/zip
 luac=/usr/bin/luac
+dosnap=dosnap.sh
+dosnap_clean=dosnap_clean.sh
 
 builddir=../bin/build/
 distdir=../bin/
+snaptemplatedir=../dist/snap-template/
 
 windir=~/Downloads/love-0.10.2-win64
 osxapp=~/Downloads/love-0.10.2-macosx-x64/love.app
@@ -26,6 +29,12 @@ test :
 	$(luac) -p $(sources)
 
 dist : love win osx
+
+snap : $(builddir)/$(game).love
+	cp $(builddir)/$(game).love $(snaptemplatedir)/lovegame/$(game).love
+	cd $(snaptemplatedir)/snap/; \
+		./$(dosnap);
+
 
 love : $(builddir)/$(game).love
 	cp $(builddir)/$(game).love $(distdir)/$(game).love
@@ -57,3 +66,5 @@ $(builddir)/$(game).love : $(sources) $(res)
 
 clean :
 	rm -rf $(builddir)/* $(distdir)/*
+	cd $(snaptemplatedir)/snap/; \
+		./$(dosnap_clean);

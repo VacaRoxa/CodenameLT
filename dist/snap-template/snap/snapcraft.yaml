@@ -1,0 +1,68 @@
+name: codenamelt
+version: "1.0.4"
+summary: A pixelart game where you have to run without getting caught by evil agents.
+description: |
+  A pixelart game where you have to run without getting caught by evil agents. This is the product of development with an awesome team of people from the VACAROXA. Find them on twitter looking the Hashtag or follow @estudiovacaroxa.
+
+confinement: strict
+grade: stable
+
+apps:
+  lovegame:
+    command: bin/launch_CodenameLT
+    plugs:
+      - pulseaudio
+      - x11
+      - network
+      - network-bind
+      - opengl
+
+parts:
+  love0.10.2:
+    plugin: dump
+    source: https://bitbucket.org/rude/love/downloads/love_0.10.2ppa1_amd64.deb
+  liblove0.10.2:
+    plugin: dump
+    source: https://bitbucket.org/rude/love/downloads/liblove0_0.10.2ppa1_amd64.deb
+#  love0.10.1:
+#    plugin: dump
+#    source: https://bitbucket.org/rude/love/downloads/love_0.10.1ppa1_amd64.deb
+#  liblove0.10.1:
+#    plugin: dump
+#    source: https://bitbucket.org/rude/love/downloads/liblove0_0.10.1ppa1_amd64.deb
+#  love0.10.0:
+#    plugin: dump
+#    source: https://bitbucket.org/rude/love/downloads/love_0.10.0ppa1_amd64.deb
+#  liblove0.10.0:
+#    plugin: dump
+#    source: https://bitbucket.org/rude/love/downloads/liblove0_0.10.0ppa1_amd64.deb
+#  love0.9.1:
+#    plugin: dump
+#    source: https://bitbucket.org/rude/love/downloads/love_0.9.1_amd64.deb
+#  liblove0.9.1:
+#    plugin: dump
+#    source: https://bitbucket.org/rude/love/downloads/liblove_0.9.1_amd64.deb
+  lovegame:
+    plugin: dump
+    source: ../lovegame/
+    stage-packages:
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx
+      - libglew1.13
+      - lua-socket
+      - libluajit-5.1-2
+      - libsdl2-2.0-0
+      - libopenal1
+      - libilmbase12
+      - libdevil1c2
+      - libogg0
+      - libmpg123-0
+      - libtheora0
+      - libvorbisfile3
+      - libmodplug1
+      - libphysfs1
+  launcher:
+    plugin: dump
+    source: ../launcher
+    organize:
+      'launch_lovegame': 'bin/launch_CodenameLT'
