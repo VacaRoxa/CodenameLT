@@ -1,3 +1,5 @@
+-- OnScreenButtons by Érico Vieira Porto 2018
+
 local Gamestate     = requireLibrary("hump.gamestate")
 local Class         = requireLibrary("hump.class")
 
@@ -6,16 +8,18 @@ ScreenButton = Class{
   init = function(self)
     self.osString = love.system.getOS( )
     self.joy = {
-      r = 24,
+      r = 32,
       x = 48,
       y = 132,
-      deadzone = 6,
+      ini_x = 48,
+      ini_y = 132,
+      deadzone = 7,
       color = {255,255,255,255},
     }
 
     self.buttonA = {
-      r = 18,
-      x = 262,
+      r = 28,
+      x = 266,
       y = 140,
       color = {255,255,255,255},
     }
@@ -27,6 +31,8 @@ ScreenButton = Class{
     self.scale = nil
     self.pressed = {}
     self.previouPressed = {}
+    self.isTouching = false
+    self.wasTouching = false
   end,
   
   update = function(self, dt)
@@ -47,67 +53,94 @@ ScreenButton = Class{
  
     for i, id in ipairs(touches) do
         x, y = love.touch.getPosition(id)
+        sx =  x / self.scale 
+        sy =  y / self.scale
     end
 
+    -- used for edge/border detection (state as square wave)
+    self.wasTouching = self.isTouching
     if x~=nil and y~=nil then 
-      sx =  x / self.scale 
-      sy =  y / self.scale
+      self.isTouching = true
     else
       sx = -1
       sy = -1
+      self.isTouching = false
     end
 
-    if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 < 4*(self.joy.r^2) then
-      
-      self.joy.color = {255,128,255,255}
+    -- checks if touchdown or touchup
+    if self.wasTouching == false and self.isTouching == true then
+      -- finger starts touching
+      self.joy.x = self.joy.ini_x
+      self.joy.y = self.joy.ini_y
+
+    elseif self.wasTouching == true and self.isTouching == false then
+      -- finger leaves screen
+      self.joy.x = self.joy.ini_x
+      self.joy.y = self.joy.ini_y
+
+    end
+     
+    -- resets everything first
+    self.touchpos.x = self.joy.x
+    self.touchpos.y = self.joy.y
+    self.joy.color = {128,128,128,64}
+    self.pressed.up = nil
+    self.pressed.down = nil
+    self.pressed.right = nil
+    self.pressed.left = nil
+    self.pressed.buttona = nil
+    self.buttonA.color = {128,128,128,64}
 
 
-      if(sx < self.joy.x-self.joy.deadzone ) then
-        self.pressed.left = true
-        self.pressed.right = nil
-      elseif (sx > self.joy.x+self.joy.deadzone ) then
-        self.pressed.right = true
-        self.pressed.left = nil
-      else 
-        self.pressed.right = nil
-        self.pressed.left = nil
+    for i, id in ipairs(touches) do
+      x, y = love.touch.getPosition(id)
+      sx =  x / self.scale 
+      sy =  y / self.scale
+
+      if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 < 2*(self.joy.r^2) then
+        
+        self.joy.color = {255,128,255,255}
+
+
+        if(sx < self.joy.x-self.joy.deadzone ) then
+          self.pressed.left = true
+          self.pressed.right = nil
+        elseif (sx > self.joy.x+self.joy.deadzone ) then
+          self.pressed.right = true
+          self.pressed.left = nil
+        else 
+          self.pressed.right = nil
+          self.pressed.left = nil
+        end
+
+
+        if(sy > self.joy.y+self.joy.deadzone ) then
+          self.pressed.down = true
+          self.pressed.up = nil
+        elseif (sy < self.joy.y-self.joy.deadzone ) then
+          self.pressed.up = true
+          self.pressed.down = nil
+        else 
+          self.pressed.up = nil
+          self.pressed.down = nil
+        end
+
+        self.touchpos.x = sx
+        self.touchpos.y = sy
+
+        if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 > 1.6*(self.joy.r^2) then
+
+          self.joy.x = sx
+          self.joy.y = sy
+        end
       end
 
-
-      if(sy > self.joy.y+self.joy.deadzone ) then
-        self.pressed.down = true
-        self.pressed.up = nil
-      elseif (sy < self.joy.y-self.joy.deadzone ) then
-        self.pressed.up = true
-        self.pressed.down = nil
-      else 
-        self.pressed.up = nil
-        self.pressed.down = nil
+      if (self.buttonA.x-sx)^2 + (self.buttonA.y-sy)^2 < 2*(self.buttonA.r^2) then
+        self.pressed.buttona = true
+        self.buttonA.color = {255,128,255,255}
       end
 
-      self.touchpos.x = sx
-      self.touchpos.y = sy
-
-    else
-
-      self.touchpos.x = self.joy.x
-      self.touchpos.y = self.joy.y
-      self.joy.color = {128,128,128,64}
-      self.pressed.up = nil
-      self.pressed.down = nil
-      self.pressed.right = nil
-      self.pressed.left = nil
-
     end
-
-    if (self.buttonA.x-sx)^2 + (self.buttonA.y-sy)^2 < 4*(self.buttonA.r^2) then
-      self.pressed.buttona = true
-      self.buttonA.color = {255,128,255,255}
-    else
-      self.pressed.buttona = nil
-      self.buttonA.color = {128,128,128,64}
-    end
-
 
     
   end,
@@ -126,8 +159,8 @@ ScreenButton = Class{
     love.graphics.setColor(self.buttonA.color)
     love.graphics.circle('fill',self.buttonA.x,self.buttonA.y,self.buttonA.r)
 
-    love.graphics.setColor(244,244,255,40)
-    love.graphics.circle('fill',self.touchpos.x,self.touchpos.y,self.joy.r/2)
+    love.graphics.setColor(244,244,255,64)
+    love.graphics.circle('fill',self.touchpos.x,self.touchpos.y,self.joy.r/1.5)
   end
 }
 
