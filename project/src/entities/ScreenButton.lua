@@ -57,7 +57,7 @@ ScreenButton = Class{
       sy = -1
     end
 
-    if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 < (self.joy.r^2) then
+    if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 < 4*(self.joy.r^2) then
       
       self.joy.color = {255,128,255,255}
 
@@ -100,7 +100,7 @@ ScreenButton = Class{
 
     end
 
-    if (self.buttonA.x-sx)^2 + (self.buttonA.y-sy)^2 < (self.buttonA.r^2) then
+    if (self.buttonA.x-sx)^2 + (self.buttonA.y-sy)^2 < 4*(self.buttonA.r^2) then
       self.pressed.buttona = true
       self.buttonA.color = {255,128,255,255}
     else
