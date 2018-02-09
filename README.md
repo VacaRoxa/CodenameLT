@@ -31,6 +31,8 @@ download the `.zip`, you can run by going in it's parent folder and running
 Alternatively, if you just want to play, look into [**releases**](https://github.com/VacaRoxa/CodenameLT/releases) 
 or go to the game [**itch.io**](https://bakudas.itch.io/clt) page and download the latest binary.
 
+Note running with the `love` command requires installing [**love2d**](https://love2d.org/)
+
 ## Game Code
 
 ### Love2d and Lua
