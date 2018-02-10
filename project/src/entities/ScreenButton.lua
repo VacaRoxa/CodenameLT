@@ -97,7 +97,7 @@ ScreenButton = Class{
       sx =  x / self.scale 
       sy =  y / self.scale
 
-      if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 < 2*(self.joy.r^2) then
+      if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 < 3*(self.joy.r^2) then
         
         self.joy.color = {255,128,255,255}
 
@@ -130,8 +130,15 @@ ScreenButton = Class{
 
         if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 > 1.6*(self.joy.r^2) then
 
-          self.joy.x = sx
-          self.joy.y = sy
+          local d_modulo = ((self.joy.x-sx)^2 + (self.joy.y-sy)^2 - 1.6*(self.joy.r^2))^0.5
+          local d_dx = (sx-self.joy.x)/((self.joy.x-sx)^2 + (self.joy.y-sy)^2)
+          local d_dy = (sy-self.joy.y)/((self.joy.x-sx)^2 + (self.joy.y-sy)^2)
+
+          local d_new_x = d_dx*d_modulo
+          local d_new_y = d_dy*d_modulo
+
+          self.joy.x = self.joy.x + d_new_x
+          self.joy.y = self.joy.y + d_new_y
         end
       end
 
