@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=CodenameLT
 Comment=A pixelart game where you have to run without getting caught by evil agents
-Exec=codenamelt.lovegame
-Icon=${SNAP}/meta/gui/CodenameLT.png
+Exec=codenamelt
+Icon=${SNAP}/meta/gui/codenamelt.png
 Terminal=false
 Type=Application
 Categories=Game;Simulation;
