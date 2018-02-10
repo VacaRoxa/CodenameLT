@@ -65,4 +65,4 @@ parts:
     plugin: dump
     source: ../launcher
     organize:
-      'launch_lovegame': 'bin/launch_CodenameLT'
+      'launch_CodenameLT': 'bin/launch_CodenameLT'

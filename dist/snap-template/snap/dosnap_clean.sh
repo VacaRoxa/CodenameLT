@@ -1,4 +1,4 @@
 #!/bin/bash
 snapcraft clean
-rm -f ../lovegame/*.love
+rm -f ../codenamelt/*.love
 rm -f codename*.snap

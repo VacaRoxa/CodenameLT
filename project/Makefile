@@ -31,7 +31,7 @@ test :
 dist : love win osx
 
 snap : $(builddir)/$(game).love
-	cp $(builddir)/$(game).love $(snaptemplatedir)/lovegame/$(game).love
+	cp $(builddir)/$(game).love $(snaptemplatedir)/codenamelt/$(game).love
 	cd $(snaptemplatedir)/snap/; \
 		./$(dosnap);
 
