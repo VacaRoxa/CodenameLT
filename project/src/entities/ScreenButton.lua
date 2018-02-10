@@ -2,6 +2,9 @@
 
 local Gamestate     = requireLibrary("hump.gamestate")
 local Class         = requireLibrary("hump.class")
+local lume          = requireLibrary("lume")
+
+local 
 
 ScreenButton = Class{
   -- initializes the inventory
@@ -33,6 +36,18 @@ ScreenButton = Class{
     self.previouPressed = {}
     self.isTouching = false
     self.wasTouching = false
+  end,
+
+  pressedAmount = function (self, pressed, origin)
+    -- clam uses value, min, max
+    local valueToReturn = lume.clamp(math.abs(origin-pressed)/((1.6*(self.joy.r^2))^0.5),0,1 )
+
+    local deadzone = self.joy.deadzone / ((1.6*(self.joy.r^2))^0.5) 
+    if valueToReturn < deadzone then
+      valueToReturn = 0
+    end
+  
+    return valueToReturn
   end,
   
   update = function(self, dt)
@@ -91,7 +106,8 @@ ScreenButton = Class{
     self.pressed.buttona = nil
     self.buttonA.color = {128,128,128,64}
 
-
+    -- when the player presses A, the directional must keep working
+    -- so for multitouch, we need this for to see every place being touched
     for i, id in ipairs(touches) do
       x, y = love.touch.getPosition(id)
       sx =  x / self.scale 
@@ -105,31 +121,50 @@ ScreenButton = Class{
         if(sx < self.joy.x-self.joy.deadzone ) then
           self.pressed.left = true
           self.pressed.right = nil
+          self.pressed.left_amount = self.pressedAmount(self,sx, self.joy.x)
+          self.pressed.right_amount = nil
         elseif (sx > self.joy.x+self.joy.deadzone ) then
           self.pressed.right = true
           self.pressed.left = nil
+          self.pressed.right_amount = self.pressedAmount(self, sx, self.joy.x)
+          self.pressed.left_amount = nil
         else 
           self.pressed.right = nil
           self.pressed.left = nil
+          self.pressed.right_amount = nil
+          self.pressed.left_amount = nil
         end
 
 
         if(sy > self.joy.y+self.joy.deadzone ) then
           self.pressed.down = true
           self.pressed.up = nil
+          self.pressed.down_amount = self.pressedAmount(self, sy, self.joy.y)
+          self.pressed.up_amount = nil
         elseif (sy < self.joy.y-self.joy.deadzone ) then
           self.pressed.up = true
           self.pressed.down = nil
+          self.pressed.up_amount = self.pressedAmount(self, sy, self.joy.y)
+          self.pressed.down_amount = nil
         else 
           self.pressed.up = nil
           self.pressed.down = nil
+          self.pressed.up_amount = nil
+          self.pressed.down_amount = nil
         end
 
         self.touchpos.x = sx
         self.touchpos.y = sy
 
+        -- evaluates if center of joystick must be moved
         if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 > 1.6*(self.joy.r^2) then
 
+          -- move the center by the difference dragged. eg:
+          -- if player started draggin at 100,100 and 50 is limit,
+          -- when finger goes to 160,100, center moves to 110,100.
+          --
+          -- we need to calculate the distance as a modulo and then set
+          -- the direction vector separetely
           local d_modulo = ((self.joy.x-sx)^2 + (self.joy.y-sy)^2 - 1.6*(self.joy.r^2))^0.5
           local d_dx = (sx-self.joy.x)/((self.joy.x-sx)^2 + (self.joy.y-sy)^2)
           local d_dy = (sy-self.joy.y)/((self.joy.x-sx)^2 + (self.joy.y-sy)^2)
@@ -142,6 +177,7 @@ ScreenButton = Class{
         end
       end
 
+      -- the accept button is much simpler, we just check for fingers in it's area
       if (self.buttonA.x-sx)^2 + (self.buttonA.y-sy)^2 < 2*(self.buttonA.r^2) then
         self.pressed.buttona = true
         self.buttonA.color = {255,128,255,255}

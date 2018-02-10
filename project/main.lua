@@ -19,7 +19,7 @@ local Terebi    = requireLibrary("terebi")
 local Gamestate = requireLibrary("hump/gamestate")
 
 -- Game Version
-GAME_VERSION = '1.0.4'
+GAME_VERSION = '1.0.5'
 
 -- a variable for debug flags
 debug_mode = false
@@ -289,6 +289,20 @@ end
 -- Logic
 function love.update( dt )
   scrBtn:update(dt)
+  if scrBtn.pressed.left == true then 
+    keys_pressed['left_amount'] = scrBtn.pressed.left_amount
+  end
+  if scrBtn.pressed.right == true then 
+    keys_pressed['right_amount'] = scrBtn.pressed.right_amount
+  end
+  if scrBtn.pressed.down == true then 
+    keys_pressed['down_amount'] = scrBtn.pressed.down_amount
+  end
+  if scrBtn.pressed.up == true then 
+    keys_pressed['up_amount'] = scrBtn.pressed.up_amount
+  end
+
+
   if scrBtn.previouPressed.left ~= true and scrBtn.pressed.left == true then 
     keys_pressed['left'] = true
   elseif scrBtn.previouPressed.left == true and scrBtn.pressed.left ~= true then  
@@ -325,6 +339,9 @@ function love.update( dt )
 		-- It returns 0 when it is at rest
 
 		if     p1joystick:getGamepadAxis("leftx")<-0.2 then
+      keys_pressed['left_amount'] = math.abs(p1joystick:getGamepadAxis("leftx"))
+      keys_pressed['right_amount'] = nil 
+
 			if keys_previousGamepad['left']~=true then
 				keys_pressed['left'] = true
 				keys_previousGamepad['left'] = true
@@ -337,7 +354,10 @@ function love.update( dt )
 		end
 
 
-		if     p1joystick:getGamepadAxis("leftx")>0.2 then
+    if     p1joystick:getGamepadAxis("leftx")>0.2 then
+      keys_pressed['right_amount'] = math.abs(p1joystick:getGamepadAxis("leftx"))
+      keys_pressed['left_amount'] = nil 
+
 			if keys_previousGamepad['right']~=true then
 				keys_pressed['right'] = true
 				keys_previousGamepad['right'] = true
@@ -351,6 +371,9 @@ function love.update( dt )
 
 
 		if     p1joystick:getGamepadAxis("lefty")>0.2 then
+      keys_pressed['down_amount'] =  math.abs(p1joystick:getGamepadAxis("lefty"))
+      keys_pressed['up_amount'] = nil
+
 			if keys_previousGamepad['down']~=true then
 				keys_pressed['down'] = true
 				keys_previousGamepad['down'] = true
@@ -364,6 +387,9 @@ function love.update( dt )
 
 
 		if     p1joystick:getGamepadAxis("lefty")<-0.2 then
+      keys_pressed['up_amount'] =  math.abs(p1joystick:getGamepadAxis("lefty"))
+      keys_pressed['down_amount'] = nil
+
 			if keys_previousGamepad['up']~=true then
 				keys_pressed['up'] = true
 				keys_previousGamepad['up'] = true

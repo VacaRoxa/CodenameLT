@@ -659,7 +659,12 @@ function Game:update(dt)
       if player.pos.y > 0 then
         -- player.pos.y=player.pos.y-speed*dt
         -- force_y = force_y - 400
-        vy = vy - acc
+        local amount = 1
+        if keys_pressed.up_amount ~= nil then
+          amount = keys_pressed.up_amount
+        end
+
+        vy = vy - acc*amount
       end
     end
 
@@ -667,7 +672,12 @@ function Game:update(dt)
       if player.pos.y < map.height*map.tileheight then
         -- player.pos.y=player.pos.y+speed*dt
         -- force_y = force_y + 400
-        vy = vy + acc
+        local amount = 1
+        if keys_pressed.down_amount ~= nil then
+          amount = keys_pressed.down_amount
+        end
+
+        vy = vy + acc*amount
       end
     end
   else
@@ -679,7 +689,12 @@ function Game:update(dt)
       if player.pos.x > 0 then
         -- player.pos.x=player.pos.x-speed*dt
         -- force_x = force_x - 400
-        vx = vx - acc
+        local amount = 1
+        if keys_pressed.left_amount ~= nil then
+          amount = keys_pressed.left_amount
+        end
+
+        vx = vx - acc*amount
       end
     end
 
@@ -687,7 +702,13 @@ function Game:update(dt)
       if player.pos.x < map.width*map.tilewidth then
         -- player.pos.x=player.pos.x+speed*dt
         -- force_x = force_x + 400
-        vx = vx + acc
+        local amount = 1
+        if keys_pressed.right_amount ~= nil then
+          amount = keys_pressed.right_amount
+        end
+
+
+        vx = vx + acc*amount
       end
     end
   else
@@ -890,8 +911,37 @@ local function drawFn()
       -- let's draw additional debug info
       love.graphics.setColor( 255, 255, 255, 255 )
       love.graphics.setFont(font_Verdana2)
-      love.graphics.print("DEBUG MODE",32,32)
       love.graphics.print("player x="..player.pos.x..", y="..player.pos.y,32,8)
+
+      if keys_pressed.up_amount ~= nil then 
+        love.graphics.setColor( 0, 0, 0, 255 )
+        love.graphics.print("up_a=" .. keys_pressed.up_amount,32,24) 
+        love.graphics.setColor( 255, 255, 255, 255 )
+        love.graphics.print("up_a=" .. keys_pressed.up_amount,33,25) 
+      end
+
+      if keys_pressed.down_amount ~= nil then 
+        love.graphics.setColor( 0, 0, 0, 255 )
+        love.graphics.print("down_a=" .. keys_pressed.down_amount,32,32) 
+        love.graphics.setColor( 255, 255, 255, 255 )
+        love.graphics.print("down_a=" .. keys_pressed.down_amount,33,33) 
+      end
+
+
+      if keys_pressed.right_amount ~= nil then 
+        love.graphics.setColor( 0, 0, 0, 255 )
+        love.graphics.print("right_a=" .. keys_pressed.right_amount,32,40) 
+        love.graphics.setColor( 255, 255, 255, 255 )
+        love.graphics.print("right_a=" .. keys_pressed.right_amount,33,41) 
+      end
+      if keys_pressed.left_amount ~= nil then 
+        love.graphics.setColor( 0, 0, 0, 255 )
+        love.graphics.print("left_a=" .. keys_pressed.left_amount,32,48) 
+        love.graphics.setColor( 255, 255, 255, 255 )
+        love.graphics.print("left_a=" .. keys_pressed.left_amount,33,49) 
+      end
+      love.graphics.print("DEBUG MODE",32,150)
+      
     end
     
     scrBtn:draw()
