@@ -1,5 +1,7 @@
 # LÖVE Snap Template
 
+go to the snap folder that contains snapcraft.yaml and type `snapcraft`
+
 ## Introduction
 
 This template is designed to make it easier for developers of games based on [LÖVE](https://love2d.org/) to package them up as snaps.
