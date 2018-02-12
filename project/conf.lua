@@ -1,6 +1,6 @@
 function love.conf(t)
-    t.title = "Untitled"        -- The title of the window the game is in (string)
-    t.author = "headchant"      -- The author of the game (string)
+    t.title = "CodenameLT"        -- The title of the window the game is in (string)
+    t.author = "VACAROXA"      -- The author of the game (string)
     t.url = nil                 -- The website of the game (string)
     t.identity = nil            -- The name of the save directory (string)
     t.version = "0.10.0"         -- The LÖVE version this game was made for (string)
