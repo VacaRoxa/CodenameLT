@@ -11,8 +11,8 @@ builddir=../bin/build/
 distdir=../bin/
 snaptemplatedir=../dist/snap-template/
 
-windir=~/Downloads/love-0.10.2-win64
-osxapp=~/Downloads/love-0.10.2-macosx-x64/love.app
+LOVE_WINDIR?=~/Downloads/love-0.10.2-win64
+LOVEAPP_OSX?=~/Downloads/love-0.10.2-macosx-x64/love.app
 
 
 company=VacaRoxa
@@ -45,19 +45,19 @@ osx : $(builddir)/$(game).app
 
 win : $(builddir)/$(game).exe
 	cd $(builddir); \
-		cp $(windir)/*.dll .; \
+		cp $(LOVE_WINDIR)/*.dll .; \
 		zip -q ../$(distdir)/$(game).win.zip $(game).exe *.dll; \
 		rm *.dll
 
 $(builddir)/$(game).app : $(builddir)/$(game).love
-	cp -a $(osxapp) $(builddir)/$(game).app
+	cp -a $(LOVEAPP_OSX) $(builddir)/$(game).app
 	cp $(builddir)/$(game).love $(builddir)/$(game).app/Contents/Resources/
 	sed -i.bak 's/<string>LÖVE<\/string>/<string>$(game)<\/string>/g' "$(builddir)/$(game).app/Contents/Info.plist"
 	sed -i.bak 's/<string>org\.love2d\.love<\/string>/<string>org\.$(company)\.$(game)<\/string>/g' "$(builddir)/$(game).app/Contents/Info.plist"
 	sed -i.bak '/<key>UTExportedTypeDeclarations<\/key>/,/^\t<\/array>/{d}' "$(builddir)/$(game).app/Contents/Info.plist"
 
 $(builddir)/$(game).exe : $(builddir)/$(game).love
-	cat $(windir)/love.exe $(builddir)/$(game).love > $(builddir)/$(game).exe
+	cat $(LOVE_WINDIR)/love.exe $(builddir)/$(game).love > $(builddir)/$(game).exe
 
 $(builddir)/$(game).love : $(sources) $(res)
 	mkdir -p $(builddir)
