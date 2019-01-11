@@ -536,5 +536,10 @@ function love.joystickreleased(joystick, btn)
 	
 end
 
+-- when window is resized, use terebi to handle resize
+function love.resize(w, h)
+	screen:handleResize()
+end
+
 -- Get console output working with sublime text
 io.stdout:setvbuf("no")
