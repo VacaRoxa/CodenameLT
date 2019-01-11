@@ -17,14 +17,14 @@ ScreenButton = Class{
       ini_x = 48,
       ini_y = 132,
       deadzone = 7,
-      color = {255,255,255,255},
+      color = {255/255,255/255,255/255,255},
     }
 
     self.buttonA = {
       r = 28,
       x = 266,
       y = 140,
-      color = {255,255,255,255},
+      color = {255/255,255/255,255/255,255},
     }
 
     self.touchpos = {
@@ -98,13 +98,13 @@ ScreenButton = Class{
     -- resets everything first
     self.touchpos.x = self.joy.x
     self.touchpos.y = self.joy.y
-    self.joy.color = {128,128,128,64}
+    self.joy.color = {128/255,128/255,128/255,64}
     self.pressed.up = nil
     self.pressed.down = nil
     self.pressed.right = nil
     self.pressed.left = nil
     self.pressed.buttona = nil
-    self.buttonA.color = {128,128,128,64}
+    self.buttonA.color = {128/255,128/255,128/255,64}
 
     -- when the player presses A, the directional must keep working
     -- so for multitouch, we need this for to see every place being touched
@@ -115,7 +115,7 @@ ScreenButton = Class{
 
       if (self.joy.x-sx)^2 + (self.joy.y-sy)^2 < 3*(self.joy.r^2) then
         
-        self.joy.color = {255,128,255,255}
+        self.joy.color = {255/255,128/255,255/255,255}
 
 
         if(sx < self.joy.x-self.joy.deadzone ) then
@@ -180,7 +180,7 @@ ScreenButton = Class{
       -- the accept button is much simpler, we just check for fingers in it's area
       if (self.buttonA.x-sx)^2 + (self.buttonA.y-sy)^2 < 2*(self.buttonA.r^2) then
         self.pressed.buttona = true
-        self.buttonA.color = {255,128,255,255}
+        self.buttonA.color = {255/255,128/255,255/255,255}
       end
 
     end
@@ -202,7 +202,7 @@ ScreenButton = Class{
     love.graphics.setColor(self.buttonA.color)
     love.graphics.circle('fill',self.buttonA.x,self.buttonA.y,self.buttonA.r)
 
-    love.graphics.setColor(244,244,255,64)
+    love.graphics.setColor(244/255,244/255,255/255,64)
     love.graphics.circle('fill',self.touchpos.x,self.touchpos.y,self.joy.r/1.5)
   end
 }

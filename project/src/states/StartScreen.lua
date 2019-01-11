@@ -136,7 +136,7 @@ local function drawFn2()
     love.graphics.setShader()
     cnv = love.graphics.newCanvas(GAME_WIDTH,GAME_HEIGHT)
     cnv:renderTo(function()
-      love.graphics.setColor(255,255,255,opacityTween)
+      love.graphics.setColor(255/255,255/255,255/255,opacityTween)
       if opacityTween<256-opacity_step then
         love.graphics.draw(Image.logo)
       else
@@ -146,20 +146,20 @@ local function drawFn2()
         local txt_x = 96
         local txt_y = 64
         local txt_y2 = txt_y+12
-        love.graphics.setColor(12,158,100,196)
+        love.graphics.setColor(12/255,158/255,100/255,196)
         love.graphics.print('> Hello, Susan ',txt_x,txt_y-12)
         love.graphics.print('Controls: WASD+K',96,128)
         for k,v in pairs(menu_entries) do
-          love.graphics.setColor(12,158,100,196)
+          love.graphics.setColor(12/255,158/255,100/255,196)
           love.graphics.print(menu_entries[k],txt_x,txt_y-12+12*k)
           if(k==selected) then
-            love.graphics.setColor(255,255,255,128)
+            love.graphics.setColor(255/255,255/255,255/255,128)
             love.graphics.print(menu_entries[k],txt_x,txt_y-12+12*k)
           end
         end
 
 
-        love.graphics.setColor(12,24,48,128)
+        love.graphics.setColor(12/255,24/255,48/255,128)
         love.graphics.print('v' .. GAME_VERSION,282,4)
         scrBtn:draw()
       end

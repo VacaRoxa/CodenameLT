@@ -19,7 +19,7 @@ function Character.init(name,type,image,x,y, physicWorld ,animTime)
 
 
     chara.animTime = animTime and animTime or 0.1
-    chara.color = {255, 255, 255, 255}
+    chara.color = {255/255, 255/255, 255/255, 255}
     chara.sprite = love.graphics.newImage(image)
     chara.anim_grid = anim8.newGrid(24, 24, chara.sprite:getWidth(), chara.sprite:getHeight())
     chara.current_direction = 'down'

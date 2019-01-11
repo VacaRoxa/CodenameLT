@@ -327,7 +327,7 @@ local function initializePlayerCharacter(spawnX,spawnY)
               -- ideally, the enemy sprites should be 'tackled' away from player on hit
               -- I don't know how to do this in a nice way
               sprite_list[k].body:setLinearDamping(30)
-              sprite_list[k].color = {255,128,128,255}
+              sprite_list[k].color = {255/255,128/255,128/255,255}
               sprite_list[k].body:applyLinearImpulse(lume.clamp(sniper_kill_ray^2/(2*(v.pos.x-player.pos.x)),-2000, 2000),
                                                      lume.clamp(sniper_kill_ray^2/(2*(v.pos.y-player.pos.y)),-2000, 2000))
 
