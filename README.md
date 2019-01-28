@@ -2,7 +2,7 @@
 
 A pixelart game where you have to run without getting caught by evil agents. 
 This is the product of development with an awesome team of people from the 
-[VACAROXA](https://www.padrim.com.br/vacaroxa). Find them on 
+[VACAROXA](https://apoia.se/vacaroxa). Find them on 
 [twitter looking the Hashtag](https://twitter.com/hashtag/vacaroxa?src=hash)
 or follow [@estudiovacaroxa](https://twitter.com/estudiovacaroxa).
 
