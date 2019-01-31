@@ -1,5 +1,7 @@
 # Codename-LT
 
+Get it on : [Love](https://github.com/VacaRoxa/CodenameLT/releases/download/1.0.5/CodenameLT.love) | [OSX](https://github.com/VacaRoxa/CodenameLT/releases/download/1.0.5/CodenameLT.osx.zip) | [Windows](https://github.com/VacaRoxa/CodenameLT/releases/download/1.0.5/CodenameLT.win.zip) | [Ubuntu](https://snapcraft.io/codenamelt) | [Android](https://play.google.com/store/apps/details?id=com.codenamelt.vacaroxa)
+
 A pixelart game where you have to run without getting caught by evil agents. 
 This is the product of development with an awesome team of people from the 
 [VACAROXA](https://apoia.se/vacaroxa). Find them on 
